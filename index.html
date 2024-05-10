@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Countdown to June 3rd in Algeria</title>
+<!-- Moment.js CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+<!-- Moment Timezone CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.34/moment-timezone-with-data.min.js"></script>
+</head>
+<body style="text-align: center; font-size: 20px;">
+
+<div id="countdown"></div>
+<div id="elapsed-time" style="display: none;"></div>
+
+<script>
+// Set the target date (June 3rd)
+var targetDate = moment.tz("2024-06-03 10:00:00", "Africa/Algiers");
+var countdownFinished = false;
+
+// Update the countdown every second
+var x = setInterval(function() {
+  // Get current date and time in Algeria's time zone
+  var algeriaDate = moment().tz("Africa/Algiers");
+
+  // Calculate the remaining time difference
+  var diff = moment.duration(targetDate.diff(algeriaDate));
+  
+  // Extract days, hours, minutes, and seconds
+  var days = diff.days();
+  var hours = diff.hours();
+  var minutes = diff.minutes();
+  var seconds = diff.seconds();
+  
+  // Display the countdown or "Finish" if the countdown is over
+  if (diff.asSeconds() <= 0) {
+    clearInterval(x);
+    document.getElementById("countdown").innerHTML = "L'attente est finiiiiiiiie Houhoa réuniiiie  ! 🥰🥰🥰 <br> Love uuu 😚😚😚";
+    countdownFinished = true;
+  } else {
+    var countdownString = "Little patience 🤗🤗🤗 <br> Il nous reste: ❤️";
+    countdownString += days + "j ";
+    countdownString += hours + "h ";
+    countdownString += minutes + "m ";
+    countdownString += seconds + "s ❤️";
+    
+    document.getElementById("countdown").innerHTML = countdownString;
+  }
+}, 1000);
+
+// Update the elapsed time every second after the countdown finishes
+setInterval(function() {
+  if (countdownFinished) {
+    var elapsedTime = moment().diff(targetDate);
+    var duration = moment.duration(elapsedTime);
+    
+    var days = duration.days();
+    var hours = duration.hours();
+    var minutes = duration.minutes();
+    var seconds = duration.seconds();
+    
+    var elapsedTimeString = "Depuis maintenant: ❤️ ";
+    elapsedTimeString += days + "j ";
+    elapsedTimeString += hours + "h ";
+    elapsedTimeString += minutes + "m ";
+    elapsedTimeString += seconds + "s ❤️";
+    
+    document.getElementById("elapsed-time").innerHTML = elapsedTimeString;
+    document.getElementById("elapsed-time").style.display = "block";
+  }
+}, 1000);
+
+</script>
+
+</body>
+</html>
